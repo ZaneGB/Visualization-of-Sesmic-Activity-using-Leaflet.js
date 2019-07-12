@@ -82,7 +82,7 @@ function createMap(earthquakes) {
   });
 
    // Add Fault lines data
-   d3.json(TectonicPlatesLink, function(plateData) {
+   d3.json(faultLines, function(plateData) {
      // Add geoJSON data, along with style information, to the tectonic plates layer
      L.geoJson(plateData, {
        color: "blue",
