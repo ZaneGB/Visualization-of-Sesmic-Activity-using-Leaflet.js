@@ -1,6 +1,7 @@
 // Store our API endpoint inside queryUrl
 
 var queryUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
+var faultUrl = "PB2002_boundaries.json"
 
 // Perform a GET request to the query URL
 d3.json(queryUrl, function(data) {
@@ -82,7 +83,11 @@ function createMap(earthquakes) {
   });
 
    // Add Fault lines data
+<<<<<<< HEAD
+   d3.json(faultUrl, function(plateData) {
+=======
    d3.json(faultLines, function(plateData) {
+>>>>>>> 8dbcac05587aac2aea744af31656153f5bea0881
      // Add geoJSON data, along with style information, to the tectonic plates layer
      L.geoJson(plateData, {
        color: "blue",
