@@ -83,11 +83,11 @@ function createMap(earthquakes) {
   });
 
    // Add Fault lines data
-<<<<<<< HEAD
+
    d3.json(faultUrl, function(plateData) {
-=======
-   d3.json(faultLines, function(plateData) {
->>>>>>> 8dbcac05587aac2aea744af31656153f5bea0881
+
+//    d3.json(faultLines, function(plateData) {
+
      // Add geoJSON data, along with style information, to the tectonic plates layer
      L.geoJson(plateData, {
        color: "blue",
@@ -101,34 +101,44 @@ function createMap(earthquakes) {
     collapsed: false
   }).addTo(myMap);
 
-  // Create legend
-  var legend = L.control({position: 'bottomright'});
+  var legend = L.control({
+    position: "bottomright"
+  });
 
-  legend.onAdd = function (myMap) {
+  legend.onAdd = function() {
+    var div = L
+      .DomUtil
+      .create("div", "info legend");
 
-    var div = L.DomUtil.create('div', 'info legend'),
-              labels = [],
-              grades = [0, 1, 2, 3, 4, 5];
-              
+    var grades = [0, 1, 2, 3, 4, 5];
+    var colors = [
+      "lightgreen",
+      "darkgreen",
+      "yellow",
+      "tan",
+      "darkorange",
+      "red"
+    ];
 
   // Generate label based on USGS earthquake data.
   // The darker color, the greater the  sesimic activity.
 
     for (var i = 0; i < grades.length; i++) {
-        div.innerHTML +=
-            '<i style="background:' + Color(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+       div.innerHTML +=
+          "<i style='background: " + colors[i] + "'></i> " +
+          grades[i] + (grades[i + 1] ? "&ndash;" + grades[i + 1] + "<br>" : "+");
     }
     return div;
   };
 
+
   legend.addTo(myMap);
-}
+};
 
 // Increase size of circles to improve visibility.
 function Radius(value){
   return value*40000
-}
+};
 
 function Color(magnitude) {
   if (magnitude > 5) {
